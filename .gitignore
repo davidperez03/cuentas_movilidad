@@ -1,0 +1,101 @@
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Archivos de log
+*.log
+logs/
+
+# Archivos de caché
+.cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+.virtualenv
+
+# Distribución / empaquetado
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Base de datos
+*.sqlite3
+*.db
+*.sqlite
+
+# Alembic
+alembic/versions/*.pyc
+migrations/__pycache__/
+
+# FastAPI específico
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Archivos temporales
+*.tmp
+*.temp
+.temp/
+
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de respaldo
+*.bak
+*.backup
+*~
+
+# Uploads
+uploads/
+media/
+
+# Documentación generada
+docs/_build/
+
+# Archivos de configuración locales
+config/local.py
+settings/local.py
