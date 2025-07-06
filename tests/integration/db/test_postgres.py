@@ -1,9 +1,6 @@
-# tests/integration/test_postgres.py
 import pytest
 import os
 from sqlalchemy import create_engine, text
-from sqlalchemy.exc import OperationalError
-from app.core.settings import settings
 
 
 class TestPostgreSQLConnection:

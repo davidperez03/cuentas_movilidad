@@ -85,13 +85,12 @@ class TestTipoNovedad:
         """Verificar que los valores del enum son correctos"""
         assert TipoNovedad.DOCUMENTO_FALTANTE.value == "documento_faltante"
         assert TipoNovedad.DOCUMENTO_INCORRECTO.value == "documento_incorrecto"
-        assert TipoNovedad.PLACA_INCORRECTA.value == "placa_incorrecta"
+        assert TipoNovedad.INFORMACION_INCONSISTENTE.value == "informacion_inconsistente"
         assert TipoNovedad.OTRO.value == "otro"
     
     def test_tipos_especificos_vehiculos(self):
         """Test tipos específicos relacionados con vehículos"""
         tipos_vehiculos = [
-            TipoNovedad.PLACA_INCORRECTA,
             TipoNovedad.SOAT_VENCIDO,
             TipoNovedad.TECNICOMECANICA_VENCIDA
         ]
@@ -105,13 +104,12 @@ class TestTipoNovedad:
         tipos_docs = [
             TipoNovedad.DOCUMENTO_FALTANTE,
             TipoNovedad.DOCUMENTO_INCORRECTO,
-            TipoNovedad.ARCHIVO_DANADO,
             TipoNovedad.FIRMA_FALTANTE
         ]
         
         for tipo in tipos_docs:
             assert tipo in TipoNovedad
-            assert "documento" in tipo.value or "archivo" in tipo.value or "firma" in tipo.value
+            assert "documento" in tipo.value or "firma" in tipo.value
     
     def test_tipo_otro_como_fallback(self):
         """Test que OTRO existe como fallback"""
@@ -123,16 +121,21 @@ class TestTipoNovedad:
     
     def test_cobertura_completa_tipos(self):
         """Test que tenemos cobertura completa de tipos de novedad"""
+        # Verificar tipos exactos definidos en el enum
         tipos_esperados = [
-            "documento_faltante", "documento_incorrecto", "placa_incorrecta",
-            "informacion_inconsistente", "archivo_danado", "firma_faltante",
+            "documento_faltante", "documento_incorrecto", 
+            "informacion_inconsistente", "firma_faltante",
             "fecha_incorrecta", "datos_propietario_incompletos", 
             "soat_vencido", "tecnicomecanica_vencida", "otro"
         ]
         
         tipos_reales = [tipo.value for tipo in TipoNovedad]
+        
+        # Verificar longitud exacta
+        assert len(tipos_reales) == 9
         assert len(tipos_reales) == len(tipos_esperados)
         
+        # Verificar que todos los tipos esperados están presentes
         for tipo_esperado in tipos_esperados:
             assert tipo_esperado in tipos_reales
 
@@ -167,7 +170,8 @@ class TestComportamientoGeneralEnums:
     
     def test_enums_no_se_pueden_instanciar_directamente(self):
         """Test que no se pueden crear nuevas instancias"""
-        with pytest.raises(TypeError):
+        # En Python, los enums lanzan ValueError para valores inválidos
+        with pytest.raises(ValueError):
             TipoServicio("nuevo_tipo")
     
     def test_acceso_por_nombre(self):
