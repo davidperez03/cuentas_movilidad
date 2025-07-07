@@ -188,7 +188,7 @@ class TestPlacaMetodos:
     def test_equality(self):
         """Test igualdad entre placas"""
         placa1 = Placa("ABC123")
-        placa2 = Placa("abc 123")  # Debe normalizarse
+        placa2 = Placa("abc 123")
         assert placa1 == placa2
 
 
