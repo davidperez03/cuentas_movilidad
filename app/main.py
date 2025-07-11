@@ -18,26 +18,23 @@ async def lifespan(app: FastAPI):
     """
     Gestión del ciclo de vida de la aplicación
     """
-    # Startup
     logger.info(f"🚀 Iniciando {settings.app_name}")
     logger.info(f"🔧 Entorno: {'Desarrollo' if settings.debug else 'Producción'}")
     logger.info(f"🗄️ Base de datos: {'SQLite' if database_url.startswith('sqlite') else 'PostgreSQL'}")
     
-    yield  # La aplicación está corriendo
+    yield 
     
-    # Shutdown
     logger.info("🛑 Cerrando aplicación...")
 
-# Configuración de la aplicación con lifespan
 app = FastAPI(
     title=settings.app_name,
     version="1.0.0",
     description="Sistema de Gestión de Cuentas - API para traslados y radicación de cuentas administrativas",
-    docs_url="/docs" if settings.debug else None,  # Solo mostrar docs en desarrollo
+    docs_url="/docs" if settings.debug else None,
     redoc_url="/redoc" if settings.debug else None,
     openapi_url="/openapi.json" if settings.debug else None,
     debug=settings.debug,
-    lifespan=lifespan  # ← Nueva sintaxis
+    lifespan=lifespan 
 )
 
 @app.get(
@@ -55,7 +52,6 @@ async def health_check(db: Session = Depends(get_db)):
         Dict con el estado del sistema y la base de datos
     """
     try:
-        # Verificar conexión a base de datos
         db.execute(text("SELECT 1"))
         db_status = "healthy"
         db_message = "Base de datos conectada correctamente"
@@ -63,11 +59,10 @@ async def health_check(db: Session = Depends(get_db)):
         logger.error(f"Error de conexión a BD: {str(e)}")
         db_status = "unhealthy"
         db_message = f"Error de conexión: {str(e)}"
-        # En producción, no exponer detalles del error
+  
         if not settings.debug:
             db_message = "Error de conexión a base de datos"
     
-    # Determinar tipo de base de datos
     database_type = "SQLite" if database_url.startswith("sqlite") else "PostgreSQL"
     
     response_data = {
@@ -125,7 +120,6 @@ if settings.debug:
             }
         }
 
-# Endpoint raíz
 @app.get(
     "/", 
     summary="Página Principal",

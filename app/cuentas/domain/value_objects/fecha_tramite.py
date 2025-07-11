@@ -188,7 +188,7 @@ class FechaTramite:
         if not solo_dias_laborales:
             return cls(fecha)
         
-        while fecha.weekday() >= 5:  # Mientras sea fin de semana
+        while fecha.weekday() >= 5:  
             fecha += timedelta(days=1)
         
         return cls(fecha)

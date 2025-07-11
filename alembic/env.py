@@ -4,19 +4,19 @@ from alembic import context
 import os
 import sys
 
-# Agregar el directorio raíz al path
+"""Agregar el directorio raíz al path"""
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from app.core.settings import settings
 
-# Configuración de Alembic
+"""Configuración de Alembic"""
 config = context.config
 
-# Configurar logging
+"""Configurar logging"""
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Metadatos de los modelos (por ahora None, se actualizará cuando tengamos modelos)
+"""Metadatos de los modelos (por ahora None, se actualizará cuando tengamos modelos)"""
 target_metadata = None
 
 def get_url():

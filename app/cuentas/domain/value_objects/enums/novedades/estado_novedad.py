@@ -1,4 +1,3 @@
-# app/cuentas/domain/enums/novedades/estado_novedad.py
 from enum import Enum
 from typing import List
 
