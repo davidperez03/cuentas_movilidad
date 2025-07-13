@@ -13,10 +13,10 @@ class IdentificadorNovedad:
     Controla la trazabilidad y numeración secuencial de novedades
     en procesos de traslado y radicación.
     """
-    codigo: str  # Código único: NOV-YYYYMMDD-NNNN
-    fecha_creacion: date  # Fecha de creación de la novedad
-    consecutivo: int  # Número consecutivo del día
-    uuid_interno: str  # UUID interno para garantizar unicidad
+    codigo: str  
+    fecha_creacion: date  
+    consecutivo: int 
+    uuid_interno: str  
 
     def __post_init__(self):
         if not self.codigo or not self.codigo.strip():
@@ -123,12 +123,10 @@ class IdentificadorNovedad:
         if not re.match(r'^NOV-\d{8}-\d{4}$', codigo):
             raise ValueError(f"Formato de código inválido: {codigo}")
         
-        # Extraer componentes del código
         partes = codigo.split('-')
         fecha_str = partes[1]
         consecutivo = int(partes[2])
         
-        # Parsear fecha
         year = int(fecha_str[:4])
         month = int(fecha_str[4:6])
         day = int(fecha_str[6:8])
@@ -190,9 +188,9 @@ class ReporteNovedad:
     Complementa el IdentificadorNovedad con datos de quién y cuándo reporta.
     """
     identificador: IdentificadorNovedad
-    funcionario_reporta: str  # ID del funcionario que reporta
-    timestamp_reporte: datetime  # Momento exacto del reporte
-    descripcion_corta: str  # Descripción breve (máx 200 chars)
+    funcionario_reporta: str 
+    timestamp_reporte: datetime  
+    descripcion_corta: str 
 
     def __post_init__(self):
         if not self.funcionario_reporta or not self.funcionario_reporta.strip():
@@ -206,8 +204,7 @@ class ReporteNovedad:
         
         if not isinstance(self.timestamp_reporte, datetime):
             raise ValueError("El timestamp debe ser un objeto datetime")
-        
-        # Normalizar strings
+
         object.__setattr__(self, 'funcionario_reporta', self.funcionario_reporta.strip().upper())
         object.__setattr__(self, 'descripcion_corta', self.descripcion_corta.strip())
 

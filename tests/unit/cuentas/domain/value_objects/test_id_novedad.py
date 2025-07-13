@@ -1,6 +1,6 @@
 import pytest
 from datetime import date, datetime, timedelta
-from app.cuentas.domain.value_objects.id_novedad import IdentificadorNovedad, ReporteNovedad
+from app.cuentas.domain.value_objects.ids.id_novedad import IdentificadorNovedad, ReporteNovedad
 
 
 class TestIdentificadorNovedadCreacion:
